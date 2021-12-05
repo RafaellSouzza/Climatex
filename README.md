@@ -11,7 +11,7 @@ Os ícones podem ser encontrados em http://www.alessioatzeni.com/meteocons/.
 O layout deve ser seguido, mas você pode sugerir melhorias. Descreva essas melhorias no README e diga o por que delas. Você ganha pontos extras se essas melhorias forem positivas, ou perde pontos do contrário.
 
 ## Baixando o projeto
-- git clone [https://github.com/RafaellSouzza/climatex.git](https://github.com/RafaellSouzza/climatex.git)
+- git clone [https://github.com/RafaellSouzza/Climatex.git](https://github.com/RafaellSouzza/Climatex.git)
 - cd challenge-charlie
 
 ## Rodando o microsite localmente
