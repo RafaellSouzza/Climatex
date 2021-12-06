@@ -1,0 +1,29 @@
+{
+  "City": [
+    {
+      "city": "Nova Iguaçu",
+      "country": "BR",
+      "id": 4
+    },
+    {
+      "city": "Nova Iguaçu",
+      "country": "BR",
+      "id": 5
+    },
+    {
+      "city": "Toronto",
+      "country": "CA",
+      "id": 6
+    },
+    {
+      "city": "Toronto",
+      "country": "CA",
+      "id": 7
+    },
+    {
+      "city": "Toronto",
+      "country": "CA",
+      "id": 8
+    }
+  ]
+}

@@ -1,80 +1,93 @@
 <template>
-    <div class="wrapper-form-field d-flex">
-        <span
-            class="icon"
-            :class="{ 'rotating': searching }"
-            data-icon="("
-            @click="fetchWeatherInformation()"
-        ></span>
-
-        <input
-            type="text"
-            v-model="userLocation"
-            @keypress.enter="fetchWeatherInformation()"
-            placeholder="Cidade, Estado"
-        />
-    </div>
+  <div class="wrapper-form-field d-flex">
+    <input
+      type="text"
+      v-model="userLocation"
+      @keypress.enter="fetchWeatherInformation()"
+      placeholder="Cidade, Estado"
+    />
+    <button v-on:click="setfavorit(weathers)">⭐️</button> --
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+import country from "./../constants/country";
 export default {
-    name: 'Search',
-    computed: {
-        userLocation: {
-            get() {
-                return this.$store.state.search.userLocation;
-            },
-            set(value) {
-                this.$store.commit('search/SET_USER_LOCATION', value);
-            }
-        },
-        searching() {
-            return this.$store.state.search.searching;
-        }
+  name: "Search",
+  computed: {
+    userLocation: {
+      get() {
+        return this.$store.state.search.userLocation;
+      },
+      set(value) {
+        this.$store.commit("search/SET_USER_LOCATION", value);
+      },
     },
-    methods: {
-        getUserCurrentLatLong() {
-            this.$store.dispatch('search/getUserCurrentPosition');
-        },
-        fetchWeatherInformation() {
-            this.$store.dispatch('search/fetchWeatherInformation');
-        }
+    searching() {
+      return this.$store.state.search.searching;
     },
-    created() {
-        this.getUserCurrentLatLong();
-    }
-}
+      weathers() {
+      return this.$store.state.search.weathers;
+    },
+  },
+  methods: {
+    getUserCurrentLatLong() {
+      this.$store.dispatch("search/getUserCurrentPosition");
+    },
+    fetchWeatherInformation() {
+      this.$store.dispatch("search/fetchWeatherInformation");
+    },
+    getFullName(Sigl) {
+      return country[Sigl];
+    },
+    setfavorit(weathers) {
+      let city = weathers[0].city
+      let country = weathers[0].country
+      axios.post("http://localhost:3000/City", {
+        city:city,
+        country:country
+      });
+    },
+  },
+  created() {
+    this.getUserCurrentLatLong();
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-    @import url('./../sass/animations.scss');
-
-    .wrapper-form-field {
-        padding: 10px;
-        height: 15vh;
-        align-items: center;
-        background-color: #fff;
-
-        .icon {
-            color: #7d7978;
-
-            &.rotating {
-                -webkit-animation: rotating .5s linear infinite;
-                -moz-animation: rotating .5s linear infinite;
-                -ms-animation: rotating .5s linear infinite;
-                -o-animation: rotating .5s linear infinite;
-                animation: rotating .5s linear infinite;
-            }
-        }
-
-        input {
-            margin-left: 20px;
-            width: 100%;
-            border: none;
-            color: #7d7978;
-            font-weight: 500;
-            font-size: 2rem;
-            outline: none;
-        }
-    }
+.wrapper-form-field {
+  padding: 20px;
+  height: 80px;
+  width: 70%;
+  align-items: center;
+  background-color: #fff;
+  margin: 0px;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  input {
+    margin-left: 20px;
+    width: 100%;
+    border: none;
+    color: #7d7978;
+    font-weight: 500;
+    font-size: 2rem;
+    outline: none;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 50px;
+    margin: 0px -10px 6px 0px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+  }
+}
 </style>

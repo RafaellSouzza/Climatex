@@ -28,7 +28,7 @@ const app = {
                 const { data: { images } } = await axios.get(apiUrl);
                 const { url } = images[0];
 
-                commit('SET_URL_BACKGROUND_IMAGE', `${url}`);
+                commit('SET_URL_BACKGROUND_IMAGE', `${state.baseApiImageBackground}${url}`);
             } catch (_) {
                 commit('SET_URL_BACKGROUND_IMAGE', '');
             }
