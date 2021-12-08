@@ -6,7 +6,8 @@
       @keypress.enter="fetchWeatherInformation()"
       placeholder="Cidade, Estado"
     />
-    <button v-on:click="setfavorit(weathers)">⭐️</button> --
+    <button v-on:click="setfavorit(weathers)">⭐️</button> 
+    <button v-link="'/Favo'">☀️</button> 
   </div>
 </template>
 
@@ -38,8 +39,15 @@ export default {
     fetchWeatherInformation() {
       this.$store.dispatch("search/fetchWeatherInformation");
     },
+    favoritWeatherInformation() {
+      this.$store.dispatch("search/favoritWeatherInformation");
+    },
     getFullName(Sigl) {
       return country[Sigl];
+    },
+    test() {
+      let cont;
+      return cont++;
     },
     setfavorit(weathers) {
       let city = weathers[0].city
@@ -75,7 +83,7 @@ export default {
     font-size: 2rem;
     outline: none;
   }
-  button {
+  button,router-link {
     background-color: transparent;
     border: none;
     color: white;

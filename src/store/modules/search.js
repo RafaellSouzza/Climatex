@@ -122,7 +122,7 @@ const search = {
                                 dt_txt: info.dt_txt,
                                 city: data.city.name,
                                 country: data.city.country,
-                                data:data,
+                                data: data,
                             });
                         }
                     });
@@ -151,53 +151,48 @@ const search = {
             commit("SET_SEARCHING", false);
         },
         async favoritWeatherInformation() {
+            const weathers = [];
             const weathersFavo = [];
             try {
-                if (state.prevUserLocation !== state.userLocation) {
-                    const params = {
-                        q: state.userLocation,
-                        lang: "pt_br",
-                        APPID: "7ba73e0eb8efe773ed08bfd0627f07b8",
-                    };
-                    const url = `https://api.openweathermap.org/data/2.5/forecast`;
-
-                    const { data } = await axios.get(url, { params });
-                    data.list.forEach((info, key) => {
-                        if (key === 0 || info.dt_txt.includes("12:00:00")) {
-                            weathersFavo.push({
-                                tempC: kelvinToCelsius(info.main.temp),
-                                tempF: kelvinToFahrenheit(info.main.temp),
-                                description: info.weather[0].description,
-                                pressure: `${info.main.pressure}hPa`,
-                                humidity: `${info.main.humidity}%`,
-                                wind: `${degreeToDirection(
-                                    info.wind.deg
-                                )} ${metersPerSecondToKilometerPerHour(
-                                    info.wind.speed
-                                )}Km/h`,
-                                dt_txt: info.dt_txt,
-                                gp: data,
-                            });
-                        }
-                    });
-
-                    commit("SET_WEATHERSFAVO", weathersFavo);
-                }
-            } catch (error) {
-                for (let i = 0; i <= 2; i++) {
-                    weathersFavo.push({
-                        tempC: null,
-                        tempF: null,
-                        description: "",
-                        pressure: null,
-                        humidity: null,
-                        wind: null,
-                    });
-                }
-
-                window.alert(
-                    "Por favor, verifique o Nome da Cidade e Estado, pois não conseguimos fazer a busca."
+                const { dataCity } = await axios.get(
+                    "http://localhost:3000/City"
                 );
+                for (const element of dataCity) {
+                    if (index <= 5) {
+                        const params = {
+                            q: element.city,
+                            lang: "pt_br",
+                            APPID: "7ba73e0eb8efe773ed08bfd0627f07b8",
+                        };
+                        const url = `https://api.openweathermap.org/data/2.5/forecast`;
+
+                        const { data } = await axios.get(url, { params });
+                        data.list.forEach((info, key) => {
+                            if (key === 0 || info.dt_txt.includes("12:00:00")) {
+                                weathers.push({
+                                    tempC: kelvinToCelsius(info.main.temp),
+                                    tempF: kelvinToFahrenheit(info.main.temp),
+                                    description: info.weather[0].description,
+                                    pressure: `${info.main.pressure}hPa`,
+                                    humidity: `${info.main.humidity}%`,
+                                    wind: `${degreeToDirection(
+                                        info.wind.deg
+                                    )} ${metersPerSecondToKilometerPerHour(
+                                        info.wind.speed
+                                    )}Km/h`,
+                                    dt_txt: info.dt_txt,
+                                    gp: data,
+                                });
+                            }
+                        });
+                        weathersFavo.push(weathers);
+                    }
+                }
+                commit("SET_WEATHERSFAVO", weathersFavo);
+            } catch (error) {
+                weathersFavo.push("not element");
+
+                window.alert("Não á favoritos.");
                 commit("SET_WEATHERSFAVO", weathersFavo);
             }
         },

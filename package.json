@@ -6,14 +6,13 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && webpack --mode production",
-    "serve": "webpack-dev-server --mode development",
-    "test": "jest"
+    "serve": "webpack-dev-server --mode development"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RafaellSouzza/climatex.git"
   },
-  "author": "Tiago Urbano",
+  "author": "Rafael Soares",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/RafaellSouzza/climatex/issues"
@@ -22,6 +21,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
+    "@vue/cli-plugin-router": "~4.5.0",
     "@vue/test-utils": "^1.3.0",
     "@vue/vue2-jest": "^27.0.0-alpha.3",
     "babel-core": "^7.0.0-bridge.0",
@@ -44,6 +44,7 @@
     "sass-loader": "^12.3.0",
     "vue": "^2.6.14",
     "vue-loader": "^15.9.8",
+    "vue-router": "^4.0.12",
     "vue-style-loader": "^4.1.3",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^5.64.1",
@@ -75,4 +76,3 @@
     ]
   }
 }
-

@@ -1,73 +1,42 @@
 <template>
-  <div class="app" :style="backgroundProps">
-    <Search 
-    :weathers="weathers"
-    />
-    <div class="container d-flex">
-      <div class="wrapper-weather d-flex">
+  <div class="app" :style="backgroundProps" >
+    <div class="container d-flex" v-for="favo of weathersFavo" :key="favo">
+      <div class="wrapper-weather d-flex" >
+        <span>{{favo}}</span>
         <Weather
-          v-if="weathers[0]"
+          v-if="favo.weathers[0]"
           title='Hoje'
-          :weather="weathers[0]"
+          :weather="favo.weathers[0]"
           :showCelsius="showCelsius"
           @changeTemperatureType="changeTemperatureType"
         />
 
         <Weather
-          v-if="weathers[1]"
+          v-if="favo.weathers[1]"
           title="Amanhã"
-          :weather="weathers[1]"
+          :weather="favo.weathers[1]"
           :showCelsius="showCelsius"
           @changeTemperatureType="changeTemperatureType"
         />
 
         <Weather
-          v-if="weathers[2]"
+          v-if="favo.weathers[2]"
           :title="getNow(2)"
-          :weather="weathers[2]"
+          :weather="favo.weathers[2]"
           :showCelsius="showCelsius"
           @changeTemperatureType="changeTemperatureType"
         />
       </div>
     </div>
-      <div class="container d-flex">
-      <div class="wrapper-weather d-flex">
-        <Weather
-          v-if="weathers[3]"
-          :title="getNow(3)"
-          :weather="weathers[3]"
-          :showCelsius="showCelsius"
-          @changeTemperatureType="changeTemperatureType"
-        />
-
-        <Weather
-          v-if="weathers[4]"
-          :title="getNow(4)"
-          :weather="weathers[4]"
-          :showCelsius="showCelsius"
-          @changeTemperatureType="changeTemperatureType"
-        />
-
-        <Weather
-          v-if="weathers[5]"
-          :title="getNow(5)"
-          :weather="weathers[5]"
-          :showCelsius="showCelsius"
-          @changeTemperatureType="changeTemperatureType"
-        />
-      </div>
-    </div>
-    
   </div>
 </template>
 
 <script>
-import Search from "./components/Search.vue";
-import Weather from "./components/Weather.vue";
+import Weather from "./Weather.vue";
+
 export default {
-  name: "App",
+  name: "Favor",
   components: {
-    Search,
     Weather,
   },
   data: () => ({
@@ -80,8 +49,8 @@ export default {
         "background-image": `url(${this.$store.getters["app/backgroundImageUrl"]})`,
       };
     },
-    weathers() {
-      return this.$store.state.search.weathers;
+    weathersFavo() {
+      return this.$store.state.search.weathersFavo;
     },
   },
   methods: {
@@ -110,9 +79,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("./fonts/stylesheet.css");
-@import url("./sass/icons.scss");
-
 * {
   margin: 0;
   padding: 0;

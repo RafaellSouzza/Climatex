@@ -1,0 +1,16 @@
+services:
+  climatex:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/app"
+    depends_on:
+      - jsonserve
+  jsonserve:
+    build: .
+    command: json-server --watch ./data/data.json
+    ports:
+      - "3000:8000"
+    volumes:
+      - "/app"
