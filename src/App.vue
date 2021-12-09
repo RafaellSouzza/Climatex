@@ -1,7 +1,7 @@
 <template>
   <div class="app" :style="backgroundProps">
     <Search 
-    :weathers="weathers"
+  
     />
     <div class="container d-flex">
       <div class="wrapper-weather d-flex">
@@ -57,18 +57,20 @@
         />
       </div>
     </div>
-    
+    <Favor/>
   </div>
 </template>
 
 <script>
 import Search from "./components/Search.vue";
 import Weather from "./components/Weather.vue";
+import Favor from "./components/Favor.vue";
 export default {
   name: "App",
   components: {
     Search,
     Weather,
+    Favor,
   },
   data: () => ({
     showCelsius: true,

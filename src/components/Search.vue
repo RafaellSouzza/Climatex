@@ -6,8 +6,8 @@
       @keypress.enter="fetchWeatherInformation()"
       placeholder="Cidade, Estado"
     />
-    <button v-on:click="setfavorit(weathers)">⭐️</button> 
-    <button v-link="'/Favo'">☀️</button> 
+    <button v-on:click="setfavorit(weathers)">⭐️</button>
+    <button>☀️</button>
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
     searching() {
       return this.$store.state.search.searching;
     },
-      weathers() {
+    weathers() {
       return this.$store.state.search.weathers;
     },
   },
@@ -50,16 +50,20 @@ export default {
       return cont++;
     },
     setfavorit(weathers) {
-      let city = weathers[0].city
-      let country = weathers[0].country
+      let city = weathers[0].city;
+      let country = weathers[0].country;
       axios.post("http://localhost:3000/City", {
-        city:city,
-        country:country
+        city: city,
+        country: country,
       });
+      setTimeout(() => {
+        this.favoritWeatherInformation();
+      }, 1000);
     },
   },
   created() {
     this.getUserCurrentLatLong();
+    this.favoritWeatherInformation();
   },
 };
 </script>
@@ -83,7 +87,8 @@ export default {
     font-size: 2rem;
     outline: none;
   }
-  button,router-link {
+  button,
+  router-link {
     background-color: transparent;
     border: none;
     color: white;

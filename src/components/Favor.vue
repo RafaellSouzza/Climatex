@@ -1,28 +1,31 @@
 <template>
-  <div class="app" :style="backgroundProps" >
+  <div class="app" :style="backgroundProps">
     <div class="container d-flex" v-for="favo of weathersFavo" :key="favo">
-      <div class="wrapper-weather d-flex" >
-        <span>{{favo}}</span>
+      <div class="favCity" v-on:click="favorDelete(favo[0].id)">
+        <span>{{ favo[0].city }},</span>
+        <span>{{ getFullName(favo[0].country) }}</span>
+      </div>
+      <div class="wrapper-weather d-flex">
         <Weather
-          v-if="favo.weathers[0]"
-          title='Hoje'
-          :weather="favo.weathers[0]"
+          v-if="favo[0]"
+          title="Hoje"
+          :weather="favo[0]"
           :showCelsius="showCelsius"
           @changeTemperatureType="changeTemperatureType"
         />
 
         <Weather
-          v-if="favo.weathers[1]"
+          v-if="favo[1]"
           title="Amanhã"
-          :weather="favo.weathers[1]"
+          :weather="favo[1]"
           :showCelsius="showCelsius"
           @changeTemperatureType="changeTemperatureType"
         />
 
         <Weather
-          v-if="favo.weathers[2]"
+          v-if="favo[2]"
           :title="getNow(2)"
-          :weather="favo.weathers[2]"
+          :weather="favo[2]"
           :showCelsius="showCelsius"
           @changeTemperatureType="changeTemperatureType"
         />
@@ -33,7 +36,7 @@
 
 <script>
 import Weather from "./Weather.vue";
-
+import country from "./../constants/country";
 export default {
   name: "Favor",
   components: {
@@ -41,7 +44,7 @@ export default {
   },
   data: () => ({
     showCelsius: true,
-    timestamp: ""
+    timestamp: "",
   }),
   computed: {
     backgroundProps() {
@@ -57,19 +60,60 @@ export default {
     changeTemperatureType(type) {
       this.showCelsius = type === "C";
     },
+    favorDelete(id) {
+      this.$store.commit("search/SET_IDCITY", id);
+      this.$store.dispatch("search/favorDelete");
+      setTimeout(() => {
+      this.$store.dispatch("search/favoritWeatherInformation");    
+      }, 1000);    
+    },
+    getFullName(Sigl) {
+      return country[Sigl];
+    },
     getNow: function (x) {
-     const today = new Date();
-     const tomorrow = new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate() + 2));
-     const afterTomorrow = new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate() + 3));
-     const after = new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate() + 4));
-     const after1 = new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate() + 5));
-     const after2 = new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate() + 6));
-     const after3 = new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate() + 7));
-     const after4 = new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate() + 8));
-     var date = [today,tomorrow,afterTomorrow,after,after1,after2,after3,after4]
-     var dayOf = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado']
-     var ra = dayOf[date[x].getDay()]
-     return ra ;
+      const today = new Date();
+      const tomorrow = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 2)
+      );
+      const afterTomorrow = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 3)
+      );
+      const after = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 4)
+      );
+      const after1 = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 5)
+      );
+      const after2 = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 6)
+      );
+      const after3 = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 7)
+      );
+      const after4 = new Date(
+        Date.UTC(today.getFullYear(), today.getMonth(), today.getDate() + 8)
+      );
+      var date = [
+        today,
+        tomorrow,
+        afterTomorrow,
+        after,
+        after1,
+        after2,
+        after3,
+        after4,
+      ];
+      var dayOf = [
+        "Domingo",
+        "Segunda-feira",
+        "Terça-feira",
+        "Quarta-feira",
+        "Quinta-feira",
+        "Sexta-feira",
+        "Sábado",
+      ];
+      var ra = dayOf[date[x].getDay()];
+      return ra;
     },
   },
   created() {
@@ -86,16 +130,12 @@ export default {
   font-family: "Roboto", sans-serif;
 }
 
-html,
-body {
-  background-color: #cdcdcd;
-}
-.app{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 20px;
-    width: 95%;
+.app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+  width: 95%;
 }
 .d-flex {
   display: flex;
@@ -105,19 +145,27 @@ body {
     flex-direction: column;
   }
 }
-
-.wrapper-app {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-  .container {
-      display: flex;
-    justify-content:space-between;
-    height: 100%;
-    width: 100%;
-    min-width: 505px;
-    margin: 10px ;
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.favCity {
+  background-color: gray;
+  padding: 10px 20px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 22px;
+  margin: 4px 27px;
+  width: 95%;
+  span {
+    margin: 0px;
   }
+}
+.wrapper-app {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  //
 }
 </style>

@@ -1,14 +1,3 @@
 {
-  "City": [
-    {
-      "city": "Nova Iguaçu",
-      "country": "BR",
-      "id": 1
-    },
-    {
-      "city": "Alaska",
-      "country": "US",
-      "id": 2
-    }
-  ]
+  "City": []
 }
