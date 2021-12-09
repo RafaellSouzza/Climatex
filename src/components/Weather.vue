@@ -133,13 +133,13 @@ export default {
 
     &.gray {
       &.tone-1 {
-        background-color: rgba(211, 211, 211, 0.9);
+        background-color: rgba(124, 124, 124, 0.9);
       }
       &.tone-2 {
-        background-color: rgba(201, 201, 201, 0.9);
+        background-color: rgba(124, 124, 124, 0.9);
       }
       &.tone-3 {
-        background-color: rgba(148, 148, 148, 0.9);
+        background-color: rgba(124, 124, 124, 0.9);
       }
       &.tone-4 {
         background-color: rgba(124, 124, 124, 0.9);
@@ -148,13 +148,13 @@ export default {
 
     &.yellow {
       &.tone-1 {
-        background-color: rgba(255, 255, 0, 0.9);
+        background-color: rgba(140, 140, 0, 0.9);
       }
       &.tone-2 {
-        background-color: rgba(216, 216, 0, 0.9);
+        background-color: rgba(140, 140, 0, 0.9);
       }
       &.tone-3 {
-        background-color: rgba(178, 178, 0, 0.9);
+        background-color: rgba(140, 140, 0, 0.9);
       }
       &.tone-4 {
         background-color: rgba(140, 140, 0, 0.9);
@@ -163,13 +163,13 @@ export default {
 
     &.red {
       &.tone-1 {
-        background-color: rgba(255, 0, 0, 0.9);
+        background-color: rgba(140, 0, 0, 0.9);
       }
       &.tone-2 {
-        background-color: rgba(216, 0, 0, 0.9);
+        background-color: rgba(140, 0, 0, 0.9);
       }
       &.tone-3 {
-        background-color: rgba(178, 0, 0, 0.9);
+        background-color: rgba(140, 0, 0, 0.9);
       }
       &.tone-4 {
         background-color: rgba(140, 0, 0, 0.9);
@@ -178,13 +178,13 @@ export default {
 
     &.blue {
       &.tone-1 {
-        background-color: rgba(0, 192, 255, 0.9);
+        background-color: rgba(0, 73, 140, 0.9);
       }
       &.tone-2 {
-        background-color: rgba(0, 172, 255, 0.9);
+        background-color: rgba(0, 73, 140, 0.9);
       }
       &.tone-3 {
-        background-color: rgba(0, 113, 216, 0.9);
+        background-color: rgba(0, 73, 140, 0.9);
       }
       &.tone-4 {
         background-color: rgba(0, 73, 140, 0.9);

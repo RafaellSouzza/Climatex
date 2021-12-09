@@ -7,7 +7,7 @@
       placeholder="Cidade, Estado"
     />
     <button v-on:click="setfavorit(weathers)">⭐️</button>
-    <button>☀️</button>
+    <button v-on:click="real()">☀️</button>
   </div>
 </template>
 
@@ -42,6 +42,9 @@ export default {
     favoritWeatherInformation() {
       this.$store.dispatch("search/favoritWeatherInformation");
     },
+    real() {
+      this.$store.dispatch("search/favoritWeatherInformation");
+    },
     getFullName(Sigl) {
       return country[Sigl];
     },
@@ -58,7 +61,7 @@ export default {
       });
       setTimeout(() => {
         this.favoritWeatherInformation();
-      }, 1000);
+      }, 100);
     },
   },
   created() {
